@@ -1,0 +1,30 @@
+- name: Install Yum Utils pkgs
+  ansible.builtin.yum:
+    name: {{ packages }}
+  become: true
+  vars:
+    packages:
+    - yum-utils
+
+- name: Add Docker package manager
+  ansible.builtin.command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  become: true
+
+- name: Install Docker Engine, containerd, Docker Compose
+  ansible.builtin.yum:
+    name: {{ packages }}
+  become: true
+  vars:
+    packages:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin 
+    - docker-compose-plugin
+
+- name: Start service Docker, if not started
+  ansible.builtin.service:
+    name: docker
+    enabled: true
+    state: started
+  become: true
