@@ -2,3 +2,4 @@
   become: true
   roles:
   - role: install_docker
+  - role: deploy_gitlab_runner
