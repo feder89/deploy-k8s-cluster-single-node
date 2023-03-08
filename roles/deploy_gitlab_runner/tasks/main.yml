@@ -1,4 +1,4 @@
-- name: Run gitlab runner container
+- name: Runn gitlab runner container
   community.docker.docker_container:
     name: gitlab-runner
     image: gitlab/gitlab-runner:latest
@@ -6,5 +6,7 @@
     restart: true
     restart_policy: "always"
     volumes:
-    - /srv/gitlab-runner/config:/home/opc/gitlab-runner
+    - /srv/gitlab-runner/config:/etc/gitlab-runner
     - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    - "8093:8093"
