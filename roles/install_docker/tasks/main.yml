@@ -1,6 +1,6 @@
 - name: Install Yum Utils pkgs
   ansible.builtin.yum:
-    name: {{ packages }}
+    name: '{{ packages }}'
   become: true
   vars:
     packages:
@@ -12,7 +12,7 @@
 
 - name: Install Docker Engine, containerd, Docker Compose
   ansible.builtin.yum:
-    name: {{ packages }}
+    name: '{{ packages }}'
   become: true
   vars:
     packages:
