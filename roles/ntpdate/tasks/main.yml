@@ -1,0 +1,17 @@
+- name: Install ntpdate
+  apt:
+    name: ntpdate
+    state: present
+    update_cache: yes
+  become: true
+
+- name: create ntpdate daily cronjob
+  become: true
+  ansible.builtin.template:
+    src: ntpdate.j2
+    dest: /etc/cron.daily/ntpdate
+    mode: '0755'
+
+- name: intial sync with ntpserver
+  become: true
+  command: ntpdate -s '{{ ntpserver_address }}'
